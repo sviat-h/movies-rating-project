@@ -19,4 +19,6 @@ public class Movie {
     private String description;
 
     private Double averageRate;
+
+    private Rate rate;
 }

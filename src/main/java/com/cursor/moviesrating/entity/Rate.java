@@ -15,6 +15,5 @@ public class Rate {
         } else {
             throw new IllegalArgumentException("Rate value in range: 1 to 10");
         }
-        this.countOfVotes = countOfVotes;
     }
 }
