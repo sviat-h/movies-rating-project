@@ -3,8 +3,10 @@ package com.cursor.moviesrating.entity;
 import com.cursor.moviesrating.enums.Category;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
+@Document
 public class Movie {
 
     @Id
@@ -20,5 +22,12 @@ public class Movie {
 
     private Double averageRate;
 
-    private Rate rate;
+    private Integer countOfVotes;
+
+    public Movie(String name, Category category, String director, String description) {
+        this.name = name;
+        this.category = category;
+        this.director = director;
+        this.description = description;
+    }
 }

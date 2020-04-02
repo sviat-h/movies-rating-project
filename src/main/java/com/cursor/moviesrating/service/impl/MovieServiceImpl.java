@@ -6,6 +6,7 @@ import com.cursor.moviesrating.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,10 +31,27 @@ public class MovieServiceImpl implements MovieService {
         return movieRepository.save(movie);
     }
 
-
     @Override
     public Movie findMovieById(String id) {
         return movieRepository.findMovieById(id);
+    }
+
+    @Override
+    public Movie updateMovieById(Movie movie) {
+        return movieRepository.save(movie);
+    }
+
+    @Override
+    public List<String> listOfId() {
+
+        List<Movie> allMovie = movieRepository.findAll();
+        List<String> allId = new ArrayList<>();
+
+        for (Movie movie : allMovie) {
+            allId.add(movie.getId());
+        }
+
+        return allId;
     }
 
     public Integer generateUniqueIdToDb() {

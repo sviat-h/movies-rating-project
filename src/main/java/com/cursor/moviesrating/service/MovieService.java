@@ -10,4 +10,8 @@ public interface MovieService {
     Movie save(Movie movie);
 
     Movie findMovieById(String id);
+
+    Movie updateMovieById(Movie id);
+
+    List<String> listOfId();
 }

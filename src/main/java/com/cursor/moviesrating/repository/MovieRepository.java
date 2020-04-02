@@ -2,7 +2,6 @@ package com.cursor.moviesrating.repository;
 
 import com.cursor.moviesrating.entity.Movie;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -1,15 +1,20 @@
 package com.cursor.moviesrating.entity;
 
 import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
+@Document
 public class Rate {
+
+    private String idOfAMovie;
 
     private Integer rateValue;
 
-    private Integer countOfVotes;
+    public Rate(String idOfAMovie, Integer rateValue) {
 
-    public Rate(Integer rateValue, Integer countOfVotes) {
+        this.idOfAMovie = idOfAMovie;
+
         if (rateValue >= 1 && rateValue <= 10) {
             this.rateValue = rateValue;
         } else {

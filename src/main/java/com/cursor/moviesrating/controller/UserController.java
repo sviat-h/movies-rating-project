@@ -24,7 +24,12 @@ public class UserController {
     @RequestMapping("/rate/{id}")
     public Rate rate(@RequestBody Rate rate, @PathVariable String id) {
 
-        rate.setIdOfAMovie(id);
+        if (movieService.listOfId().contains(id)) {
+
+            rate.setIdOfAMovie(id);
+        } else {
+            throw new IllegalArgumentException("There are no movies with such id");
+        }
 
         return rateService.save(rate);
     }
