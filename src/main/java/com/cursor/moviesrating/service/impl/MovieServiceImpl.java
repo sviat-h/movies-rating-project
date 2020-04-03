@@ -54,6 +54,11 @@ public class MovieServiceImpl implements MovieService {
         return allId;
     }
 
+    @Override
+    public List<Movie> getAllMovie() {
+        return movieRepository.findAll();
+    }
+
     public Integer generateUniqueIdToDb() {
         Integer uniqueId = null;
 

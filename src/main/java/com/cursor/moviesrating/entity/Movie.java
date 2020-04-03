@@ -5,6 +5,8 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Data
 @Document
 public class Movie {
@@ -23,6 +25,8 @@ public class Movie {
     private Double averageRate;
 
     private Integer countOfVotes;
+
+    List<Review> reviews;
 
     public Movie(String name, Category category, String director, String description) {
         this.name = name;

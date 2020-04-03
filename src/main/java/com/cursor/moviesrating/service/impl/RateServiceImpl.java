@@ -16,7 +16,6 @@ public class RateServiceImpl implements RateService {
 
     @Override
     public Rate save(Rate rate) {
-
         return rateRepository.save(rate);
     }
 

@@ -14,4 +14,6 @@ public interface MovieService {
     Movie updateMovieById(Movie id);
 
     List<String> listOfId();
+
+    List<Movie> getAllMovie();
 }
