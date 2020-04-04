@@ -1,6 +1,7 @@
 package com.cursor.moviesrating.entity;
 
 import com.cursor.moviesrating.enums.Category;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -16,6 +17,10 @@ public class Movie {
 
     private String name;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private String categoryString;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Category category;
 
     private String director;

@@ -6,20 +6,16 @@ import com.cursor.moviesrating.entity.Review;
 import com.cursor.moviesrating.service.impl.MovieServiceImpl;
 import com.cursor.moviesrating.service.impl.RateServiceImpl;
 import com.cursor.moviesrating.service.impl.ReviewServiceImpl;
-import com.cursor.moviesrating.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
 public class UserController {
-
-    private final UserServiceImpl userService;
 
     private final RateServiceImpl rateService;
 
@@ -54,12 +50,15 @@ public class UserController {
 
     @GetMapping("/movie/{id}")
     public Movie getMovieInfo(@PathVariable String id) {
+
         if (movieService.listOfId().contains(id)) {
 
             Movie movie = movieService.findMovieById(id);
             List<Review> reviewList = reviewService.findAllByIdOfAMovie(id);
 
             movie.setReviews(reviewList);
+
+            movie.setCategoryString(movie.getCategory().toString().substring(0, 1) + movie.getCategory().toString().toLowerCase().substring(1));
 
             return movie;
         } else {
@@ -69,12 +68,22 @@ public class UserController {
 
     @GetMapping("/allMovie")
     public List<Movie> getAllMovie() {
-        return movieService.getAllMovie();
+        List<Movie> allMovies = movieService.getAllMovie();
+
+        for (Movie movie : allMovies) {
+            movie.setCategoryString(movie.getCategory().toString().substring(0, 1) + movie.getCategory().toString().toLowerCase().substring(1));
+        }
+
+        return allMovies;
     }
 
     @GetMapping("/sorted/{sortType}")
     public List<Movie> getMovieByRating(@PathVariable String sortType) {
         List<Movie> allMovies = movieService.getAllMovie();
+
+        for (Movie movie : allMovies) {
+            movie.setCategoryString(movie.getCategory().toString().substring(0, 1) + movie.getCategory().toString().toLowerCase().substring(1));
+        }
 
         Comparator<Movie> movieComparatorASC = Comparator.comparing(Movie::getAverageRate);
         Comparator<Movie> movieComparatorDESC = (movie1, movie2) -> movie2.getAverageRate().compareTo(movie1.getAverageRate());
@@ -90,13 +99,25 @@ public class UserController {
         return allMovies;
     }
 
-//    @GetMapping("/category")
-//    public List<Movie> getMovieByCategory() {
-//        List<Movie> allMovies = movieService.getAllMovie();
-//
-//        todo СОРТУВАТИ ПО КАТЕГОРІЇ
-//
-//
-//        return allMovies;
-//    }
+    @GetMapping("/category/{sortType}")
+    public List<Movie> getMovieByCategory(@PathVariable String sortType) {
+        List<Movie> allMovies = movieService.getAllMovie();
+
+        for (Movie movie : allMovies) {
+            movie.setCategoryString(movie.getCategory().toString().substring(0, 1) + movie.getCategory().toString().toLowerCase().substring(1));
+        }
+
+        Comparator<Movie> movieComparatorASC = Comparator.comparing(Movie::getCategory);
+        Comparator<Movie> movieComparatorDESC = (movie1, movie2) -> movie2.getCategory().compareTo(movie1.getCategory());
+
+        if (sortType.equals("asc")) {
+            allMovies.sort(movieComparatorASC);
+        } else if (sortType.equals("desc")) {
+            allMovies.sort(movieComparatorDESC);
+        } else {
+            throw new IllegalArgumentException("There are no such pages!");
+        }
+
+        return allMovies;
+    }
 }

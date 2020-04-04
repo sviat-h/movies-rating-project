@@ -7,11 +7,12 @@ import java.util.List;
 
 @Service
 public interface MovieService {
+
     Movie save(Movie movie);
 
     Movie findMovieById(String id);
 
-    Movie updateMovieById(Movie id);
+    void updateMovieById(Movie id);
 
     List<String> listOfId();
 

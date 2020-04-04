@@ -34,7 +34,6 @@ public class MyUserDetailsService implements UserDetailsService {
             grantedAuthorities.add(new SimpleGrantedAuthority("ADMIN"));
         } else {
             grantedAuthorities.add(new SimpleGrantedAuthority("USER"));
-
         }
 
         return grantedAuthorities;

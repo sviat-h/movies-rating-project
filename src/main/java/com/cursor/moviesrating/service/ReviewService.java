@@ -7,6 +7,7 @@ import java.util.List;
 
 @Service
 public interface ReviewService {
+
     Review save(Review review);
 
     List<Review> findAllByIdOfAMovie(String idOfAMovie);
